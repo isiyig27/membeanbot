@@ -17,7 +17,7 @@ import eventlet
 class Server:
     def __init__(self):
         self.app = Flask(__name__)
-        self.app.secret_key = "e27ec955046bf17dc14006a9aecb8124bfcea8f282d43e709ed4d5625310c7b0"
+        self.app.secret_key = "key not shown for security reasons"
         self.loginfo = loginfo()
         self.running_bots = {}
         self.scheduled_sessions = {}
@@ -53,9 +53,9 @@ class Server:
             print("All sessions cleared on server restart!")
 
     def is_valid_school_email(self, email):
-        """Validates if an email follows the 'xxxxxx.##@robcol.k12.tr' format."""
+        """Validates if an email follows the 'xxxxxx.##@schoolcode.k12.tr' format.""" #email format is checked because currently I only want people from our school to use it 
 
-        pattern = r"^[a-z]{6}\.[0-9]{2}@robcol\.k12\.tr$"
+        pattern = r"^[a-z]{6}\.[0-9]{2}@schoolcode\.k12\.tr$" #email format is checked because currently I only want people from our school to use it 
         return bool(re.match(pattern, email))
 
     def setup_socket_events(self):
@@ -185,7 +185,7 @@ class Server:
             email = request.form["email"]
             password = request.form["pass"]
             if not self.is_valid_school_email(email):
-                flash("Email format is incorrect! , (xxxxxx.##@robcol.k12.tr)", "danger")
+                flash("Email format is incorrect! , (xxxxxx.##@schoolcode.k12.tr)", "danger") #email format is checked because currently I only want people from our school to use it 
                 return redirect(url_for("signin"))
             if not self.db.checkExists(email):
                 flash("Email doesnt exist !!!", "danger")
@@ -225,7 +225,7 @@ class Server:
             email = request.form["email"]
             password = request.form["pass"]
             if not self.is_valid_school_email(email):
-                flash("Email format is incorrect! , (xxxxxx.##@robcol.k12.tr)", "danger")
+                flash("Email format is incorrect! , (xxxxxx.##@schoolcode.k12.tr)", "danger") #email format is checked because currently I only want people from our school to use it 
                 return redirect(url_for("signup"))
 
             if self.db.checkExists(email):
@@ -249,7 +249,7 @@ class Server:
         flash("You have been logged out.", "success")
         return redirect(url_for("signin"))
 
-    def run(self, host="0.0.0.0", port=5000, debug=True):
+    def run(self, host="0.0.0.0", port="/*portnumber*/", debug=True):
         self.socketio.run(self.app ,host=host, port=port, debug=debug)
     
 
