@@ -16,8 +16,8 @@ class databaseActs:
             self.mydb = mysql.connector.connect(
                 database="membean",
                 host="127.0.0.1",
-                user="root",
-                password="Hacker2008!"
+                user="user",
+                password="password"
                 )
             self.mycursor = self.mydb.cursor()
             self.connection = True
