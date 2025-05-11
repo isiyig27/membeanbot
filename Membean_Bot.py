@@ -87,7 +87,7 @@ class MembeanBot:
         service = Service('/usr/local/bin/chromedriver')  # ChromeDriver service
         self.driver = webdriver.Chrome(service=service, options=options)
 
-        openai.api_key= "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"
+        openai.api_key= "openai api key not shown for security reasons"
         gptmessages = [
             {"role": "system", "content": "you are a question solver"}
             ]
